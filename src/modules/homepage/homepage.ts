@@ -20,6 +20,7 @@ class Homepage extends Component {
       .then((products) => {
         this.popularProducts.update(products);
       });
+  
 
     const isSuccessOrder = new URLSearchParams(window.location.search).get('isSuccessOrder');
     if (isSuccessOrder != null) {

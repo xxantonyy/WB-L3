@@ -1,6 +1,6 @@
 import { Component } from '../component';
 import { ProductList } from '../productList/productList';
-import { formatPrice } from '../../utils/helpers';
+import { formatPrice, sendEvent } from '../../utils/helpers';
 import { ProductData } from 'types';
 import html from './productDetail.tpl.html';
 import { cartService } from '../../services/cart.service';
@@ -62,6 +62,8 @@ class ProductDetail extends Component {
 
   private _addToCart() {
     if (!this.product) return;
+    sendEvent('addToCard', this.product);
+    console.log('Добавлено в корзину!');
 
     cartService.addProduct(this.product);
     this._setInCart();

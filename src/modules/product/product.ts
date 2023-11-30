@@ -3,7 +3,6 @@ import { View } from '../../utils/view';
 import { formatPrice } from '../../utils/helpers'
 import html from './product.tpl.html';
 import { ProductData } from 'types';
-// import { cartService } from 'src/services/cart.service';
 
 type ProductComponentParams = { [key: string]: any };
 
