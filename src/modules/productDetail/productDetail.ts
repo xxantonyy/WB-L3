@@ -4,6 +4,7 @@ import { formatPrice, sendEvent } from '../../utils/helpers';
 import { ProductData } from 'types';
 import html from './productDetail.tpl.html';
 import { cartService } from '../../services/cart.service';
+import { userService } from '../../services/user.service';
 
 class ProductDetail extends Component {
   more: ProductList;
@@ -52,8 +53,13 @@ class ProductDetail extends Component {
       .then((secretKey) => {
         this.view.secretKey.setAttribute('content', secretKey);
       });
-
-    fetch('/api/getPopularProducts')
+      // Добавляем заголовок, получаем userID, когда переходим в карточку товара
+    console.log('userID:',userService.getUserId());
+    fetch('/api/getPopularProducts', {
+      headers: {
+        'x-userid': userService.getUserId() || ''
+      }
+    })
       .then((res) => res.json())
       .then((products) => {
         this.more.update(products);

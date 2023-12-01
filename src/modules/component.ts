@@ -1,6 +1,7 @@
 import { ViewTemplate } from '../utils/viewTemplate';
 import { View } from '../utils/view';
 
+
 export class Component {
   view: View;
   data: any;
