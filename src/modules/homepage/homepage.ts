@@ -1,22 +1,22 @@
 import { addElement } from '../../utils/helpers';
 import { Component } from '../component';
 import html from './homepage.tpl.html';
-
 import { ProductList } from '../productList/productList';
 import { userService } from '../../services/user.service';
+import { SearchSuggestions } from '../searchSuggestions/searchSuggestions';
 
 class Homepage extends Component {
   popularProducts: ProductList;
+  searchSuggestions: SearchSuggestions;
 
   constructor(props: any) {
     super(props);
 
+    this.searchSuggestions = new SearchSuggestions;
+    this.searchSuggestions.attach(this.view.suggestion)
     this.popularProducts = new ProductList();
     this.popularProducts.attach(this.view.popular);
-  }
-
-  // Здесь мы вызываем напрямую init(), и тем самым обозначаем userId,
-  // для корректного отображения в консоли, в терии этот метод излишен, но для того чтобы видеть работоспособность подходит
+  } 
 
   async fetchData() {
     await userService.init();
@@ -27,27 +27,21 @@ class Homepage extends Component {
         'x-userid': userService.getUserId() || '',
       },
     });
+    const product_test = [ 
+      {id: 1, name:'чехол iphone 13 pro', link: '/'},
+      {id: 2, name:'коляски agex', link: '/'},
+      {id: 3, name:'яндекс станция 2', link: '/'},
+    ]
+
     const products = await response.json();
     this.popularProducts.update(products);
+    this.searchSuggestions.update(product_test);
+    // this.searchSuggestions.update(products);
+    this.view.suggestion.classList.remove('load');
   }
 
   render() {
     this.fetchData();
-
-
-    // При таком исполнении только в момет вызова и непосредственно поле обработки json можно получить id а не null.
-    // Если мы хотим получить userID вне асинхронной функции то получим null.
-
-    // fetch('/api/getPopularProducts', {
-    //   headers: {
-    //     'x-userid': userService.getUserId() || '',
-    //   }
-    // })
-    //   .then((res) => res.json())
-    //   .then((products) => {
-    //     console.log('userID:', userService.getUserId());
-    //     this.popularProducts.update(products);
-    // });
 
     const isSuccessOrder = new URLSearchParams(window.location.search).get('isSuccessOrder');
     if (isSuccessOrder != null) {

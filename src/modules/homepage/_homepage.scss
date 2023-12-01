@@ -9,3 +9,25 @@
     margin-top: 30px;
   }
 }
+
+.search-suggestions-container {
+  border-radius: 8px;
+}
+
+.load {
+  height: 50px;
+  margin: 12px 0px 12px 0px;
+  animation: loop__load 1s linear infinite;
+  background: rgba(246, 246, 250, 1);
+}
+
+
+
+@keyframes loop__load {
+  0%{
+    background-position: -450px 0;
+    }
+    100%{
+    background-position: 450px 0;
+    }
+}

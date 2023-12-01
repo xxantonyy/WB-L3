@@ -25,6 +25,9 @@ export class ProductList extends Component {
     this.products = products;
     this.render();
   }
+  getProducts() {
+    return this.products;
+  }
 
   render() {
     this.view.root.innerHTML = '';

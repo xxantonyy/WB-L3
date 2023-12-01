@@ -1,0 +1,33 @@
+.tips {
+   color: rgba(0, 0, 0, 1);
+   font-size: 22px;
+   font-style: normal;
+   font-weight: 550;
+   line-height: 24px;
+   display: flex;
+   align-items: baseline;
+   flex-wrap: wrap;
+   margin: 1rem 2rem;
+}
+
+.tips__tip__text {
+   height: 26px;
+   background: linear-gradient(93deg, #DA15B8 4.93%, #8D06CC 100%);
+   background-clip: text;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   white-space: nowrap;
+}
+
+.tips__tip {
+   padding: 2px 3px 5px 3px;
+   align-items: flex-start;
+   display: flex;
+   gap: 2px;
+   background: rgba(246, 246, 250, 1);
+   margin-bottom: 5px;
+   border-radius: 8px;
+   cursor: pointer;
+   text-decoration: none;
+}
+
