@@ -10,8 +10,8 @@ class Checkout extends Component {
 
   async render() {
     this.products = await cartService.get();
-    sendEvent('route', { url: window.location.pathname });
-    console.log('Переход по rout`у!');
+    sendEvent('route', { url: window.location.href });
+    console.log(`Переход по rout-у ! ${window.location.href}`);
 
     if (this.products.length < 1) {
       this.view.root.classList.add('is__empty');
@@ -24,7 +24,7 @@ class Checkout extends Component {
       productComp.attach(this.view.cart);
     });
 
-    // переназначаем в переменную totalPrice для того чтобы передать в следилку
+    // Переназначаем в переменную totalPrice для того чтобы передать в следилку
     const totalPrice = this.products.reduce((acc, product) => (acc += product.salePriceU), 0);
     this.view.price.innerText = formatPrice(totalPrice);
 

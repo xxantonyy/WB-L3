@@ -35,7 +35,10 @@ export const sendEvent = async (type: string, payload: any) => {
     body: JSON.stringify(event)
   })
     .then(response => response.ok)
-    .catch(() => false);
+    .catch((error) => {
+      console.error(error);
+      return false
+    });
 };
 
 export const formatPrice = (price: number) => {

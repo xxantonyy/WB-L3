@@ -31,8 +31,8 @@ export class ProductList extends Component {
 
   render() {
     this.view.root.innerHTML = '';
-    sendEvent('route', { url: window.location.pathname });
-    console.log('Переход по rout`у!');
+    sendEvent('route', { url: window.location.href });
+    console.log(`Переход по rout-у ! ${window.location.href}`);
 
     // Когда получаем карточку выполняем эту функцию в которой делаем фетч и получаем секретный ключ и отправляем форму с ним 
 
@@ -58,7 +58,7 @@ export class ProductList extends Component {
         });
     }
 
-    // Ставил обсервер который следит и проверяем какие карточки находятся во viewporte
+    // Ставим обсервер который следит и проверяем какие карточки находятся во viewporte
 
 
     const observer = new IntersectionObserver((entries) => {

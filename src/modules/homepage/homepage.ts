@@ -2,8 +2,9 @@ import { addElement } from '../../utils/helpers';
 import { Component } from '../component';
 import html from './homepage.tpl.html';
 import { ProductList } from '../productList/productList';
-import { userService } from '../../services/user.service';
-import { SearchSuggestions } from '../searchSuggestions/searchSuggestions';
+import { SearchSuggestions, SearchTip } from '../searchSuggestions/searchSuggestions';
+import localforage from 'localforage';
+import { ID_DB } from '../../services/user.service';
 
 class Homepage extends Component {
   popularProducts: ProductList;
@@ -16,27 +17,27 @@ class Homepage extends Component {
     this.searchSuggestions.attach(this.view.suggestion)
     this.popularProducts = new ProductList();
     this.popularProducts.attach(this.view.popular);
-  } 
+  }
 
   async fetchData() {
-    await userService.init();
-    console.log('userID:', userService.getUserId());
-
     const response = await fetch('/api/getPopularProducts', {
       headers: {
-        'x-userid': userService.getUserId() || '',
+        'x-userid': await localforage.getItem(ID_DB) as string || window.userId,
       },
     });
-    const product_test = [ 
-      {id: 1, name:'чехол iphone 13 pro', link: '/'},
-      {id: 2, name:'коляски agex', link: '/'},
-      {id: 3, name:'яндекс станция 2', link: '/'},
+
+
+    const product_test: SearchTip[] = [
+      { title: 'чехол iphone 13 pro', href: '/' },
+      { title: 'коляски agex', href: '/' },
+      { title: 'яндекс станция 2', href: '/' },
+      { title: 'яндекс станция 3', href: '/' },
+      { title: 'яндекс станция 4', href: '/' },
     ]
 
     const products = await response.json();
     this.popularProducts.update(products);
-    this.searchSuggestions.update(product_test);
-    // this.searchSuggestions.update(products);
+    this.searchSuggestions.update(product_test || []);
     this.view.suggestion.classList.remove('load');
   }
 
