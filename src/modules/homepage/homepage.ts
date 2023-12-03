@@ -3,8 +3,7 @@ import { Component } from '../component';
 import html from './homepage.tpl.html';
 import { ProductList } from '../productList/productList';
 import { SearchSuggestions, SearchTip } from '../searchSuggestions/searchSuggestions';
-import localforage from 'localforage';
-import { ID_DB } from '../../services/user.service';
+
 
 class Homepage extends Component {
   popularProducts: ProductList;
@@ -20,11 +19,7 @@ class Homepage extends Component {
   }
 
   async fetchData() {
-    const response = await fetch('/api/getPopularProducts', {
-      headers: {
-        'x-userid': await localforage.getItem(ID_DB) as string || window.userId,
-      },
-    });
+    const response = await fetch('/api/getPopularProducts');
 
 
     const product_test: SearchTip[] = [

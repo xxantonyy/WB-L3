@@ -4,8 +4,6 @@ import { formatPrice, sendEvent } from '../../utils/helpers';
 import { ProductData } from 'types';
 import html from './productDetail.tpl.html';
 import { cartService } from '../../services/cart.service';
-import localforage from 'localforage';
-import { ID_DB } from '../../services/user.service';
 
 class ProductDetail extends Component {
   more: ProductList;
@@ -55,11 +53,7 @@ class ProductDetail extends Component {
         this.view.secretKey.setAttribute('content', secretKey);
       });
       // Добавляем заголовок, получаем userID, когда переходим в карточку товара
-    fetch('/api/getPopularProducts', {
-      headers: {
-        'x-userid': await localforage.getItem(ID_DB) as string || window.userId,
-      }
-    })
+    fetch('/api/getPopularProducts')
       .then((res) => res.json())
       .then((products) => {
         this.more.update(products);

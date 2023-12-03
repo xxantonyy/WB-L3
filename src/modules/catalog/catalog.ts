@@ -1,6 +1,8 @@
 import { Component } from '../component';
 import html from './catalog.tpl.html';
 import { ProductList } from '../productList/productList';
+import localforage from 'localforage';
+import { ID_DB } from '../../services/user.service';
 
 class Catalog extends Component {
   productList: ProductList;
@@ -17,7 +19,7 @@ class Catalog extends Component {
     // доабвляем заголовок 'x-userid': userService.getUserId() || '', получаем userID когда переходим в каталог
     const productsResp = await fetch('/api/getProducts', {
       headers: {
-        'x-userid': window.userId,
+        'x-userid': await localforage.getItem(ID_DB) as string || window.userId,
       }
     });
     const products = await productsResp.json();
