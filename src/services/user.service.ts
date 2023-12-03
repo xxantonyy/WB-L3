@@ -1,13 +1,14 @@
 import localforage from 'localforage';
 import { genUUID } from '../utils/helpers';
 
-const ID_DB = '__wb-userId';
+export const ID_DB = '__wb-userId';
 
 class UserService {
   private userId: string | null = null;
 
   async init() {
-    this.userId = await this.getId();
+    const id = await this.getId();
+    console.warn('UserID: ', id);
   }
 
   async getId(): Promise<string> {
@@ -27,6 +28,7 @@ class UserService {
   getUserId(): string | null {
     return this.userId
   }
+
 }
 
 export const userService = new UserService();
