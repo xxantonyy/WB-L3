@@ -10,7 +10,7 @@ class Checkout extends Component {
 
   async render() {
     this.products = await cartService.get();
-    sendEvent('route', { url: window.location.pathname });
+    sendEvent('route', { url: window.location.href });
     console.log('Переход по rout`у!');
 
     if (this.products.length < 1) {

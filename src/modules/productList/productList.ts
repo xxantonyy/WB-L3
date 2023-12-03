@@ -28,7 +28,7 @@ export class ProductList extends Component {
 
   render() {
     this.view.root.innerHTML = '';
-    sendEvent('route', { url: window.location.pathname });
+    sendEvent('route', { url: window.location.href });
     console.log('Переход по rout`у!');
 
     // Когда получаем карточку выполняем эту функцию в которой делаем фетч и получаем секретный ключ и отправляем форму с ним 
