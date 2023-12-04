@@ -16,7 +16,7 @@ class Catalog extends Component {
 
   async render() {
 
-    // доабвляем заголовок 'x-userid': userService.getUserId() || '', получаем userID когда переходим в каталог
+    // доабвляем заголовок , получаем userID когда переходим в каталог
     const productsResp = await fetch('/api/getProducts', {
       headers: {
         'x-userid': await localforage.getItem(ID_DB) as string || window.userId,

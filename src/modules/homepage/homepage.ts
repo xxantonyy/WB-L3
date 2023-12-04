@@ -3,6 +3,8 @@ import { Component } from '../component';
 import html from './homepage.tpl.html';
 import { ProductList } from '../productList/productList';
 import { SearchSuggestions, SearchTip } from '../searchSuggestions/searchSuggestions';
+import localforage from 'localforage';
+import { ID_DB } from '../../services/user.service';
 
 
 class Homepage extends Component {
@@ -19,9 +21,17 @@ class Homepage extends Component {
   }
 
   async fetchData() {
-    const response = await fetch('/api/getPopularProducts');
+    const response = await fetch('/api/getPopularProducts', {
+      headers: {
+        'x-userid': await localforage.getItem(ID_DB) as string || window.userId,
+      }
+    });
 
+    // // Запрос когда нужно протесчтировать на данных
+    // const suggestions_response= await fetch('/api/getSearchSeggestions');
+    // const suggestions = await suggestions_response.json();
 
+    // Мокнутые данные для теста
     const product_test: SearchTip[] = [
       { title: 'чехол iphone 13 pro', href: '/' },
       { title: 'коляски agex', href: '/' },
@@ -30,10 +40,19 @@ class Homepage extends Component {
       { title: 'яндекс станция 4', href: '/' },
     ]
 
+    // Флаг для переключения входных данных
+    let flag = true;
+
+
+    if (flag) {
+      this.searchSuggestions.update(product_test || []);
+    } else {
+      // this.searchSuggestions.update(suggestions || []);
+    }
+    this.view.suggestion.classList.remove('load');
+
     const products = await response.json();
     this.popularProducts.update(products);
-    this.searchSuggestions.update(product_test || []);
-    this.view.suggestion.classList.remove('load');
   }
 
   render() {
