@@ -32,7 +32,7 @@ class Checkout extends Component {
   private async _makeOrder(totalPrice: number) {
     // Отправляем ивент с заполнеными полями в случае заказа
     sendEvent('purchase', {
-      orderId: 'новый_заказ',
+      orderId: Date.now(),
       totalPrice: totalPrice,
       productIds: this.products.map((product) => product.id)
     });
