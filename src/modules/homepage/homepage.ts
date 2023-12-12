@@ -49,10 +49,10 @@ class Homepage extends Component {
     } else {
       // this.searchSuggestions.update(suggestions || []);
     }
-    this.view.suggestion.classList.remove('load');
-
+    
     const products = await response.json();
     this.popularProducts.update(products);
+    this.view.suggestion.classList.remove('load');
   }
 
   render() {

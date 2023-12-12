@@ -19,7 +19,10 @@
   margin: 12px 0px 12px 0px;
   animation: loop__load 1s linear infinite;
   background: rgba(246, 246, 250, 1);
-  color: transparent;
+
+  .tips {
+    color: transparent;
+  }
 }
 
 
