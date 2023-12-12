@@ -38,6 +38,7 @@ export class ProductList extends Component {
         .then((secretKey) => {
           sendEvent(eventType, { ...product, secretKey })
             .then((success) => {
+              if(!secretKey) return
               if (success) {
                 console.log('Event sent successfully.');
               } else {
