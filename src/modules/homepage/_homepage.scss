@@ -15,10 +15,11 @@
 }
 
 .load {
-  height: 50px;
+  height: 42px;
   margin: 12px 0px 12px 0px;
   animation: loop__load 1s linear infinite;
   background: rgba(246, 246, 250, 1);
+  color: transparent;
 }
 
 
