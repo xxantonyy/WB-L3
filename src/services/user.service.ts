@@ -8,7 +8,8 @@ class UserService {
 
   async init() {
     const id = await this.getId();
-    console.warn('UserID: ', id);
+    window.userId = id;
+    console.log('userID:',window.userId );
   }
 
   async getId(): Promise<string> {
